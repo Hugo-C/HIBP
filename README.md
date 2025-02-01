@@ -1,9 +1,9 @@
 # Have I Been Pwned - clone
 
 # Sommaire
-1. [Démarche et choix effectués](#Démarche et choix effectués)
-2. [Architecture](#Architecture)
-3. [Utilisation](#Utilisation)
+1. [Démarche et choix effectués](#démarche-et-choix-effectués)
+2. [Architecture](#architecture)
+3. [Utilisation](#utilisation)
 
 ## #Démarche et choix effectués
 
