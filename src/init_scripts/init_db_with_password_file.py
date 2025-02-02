@@ -1,16 +1,30 @@
-# type alias for clarity
-from redis import Redis
+"""
+Main app
 
-Prefix = str  # first 5 chars of password's hash
-Password = str
+Usage:
+   init_db_with_password_file.py --download
+   init_db_with_password_file.py <passwords-path>
 
-class PasswordStorage:
-    def __init__(self, client: Redis):
-        self.client = client
+Options:
+    -h --help             Show this screen.
+    --download            Download the rockyou password file from Github
+    <passwords-path>     Absolute path to the password init file (1 password per line
 
-    def add_password(self, *, prefix: Prefix, password: Password):
-        self.client.sadd(prefix, password)
+"""
 
-    def get_passwords(self, prefix: Prefix) -> set[Password]:
-        passwords_as_bytes = self.client.smembers(prefix)
-        return {password.decode() for password in passwords_as_bytes}
+from docopt import docopt
+
+
+def init_db(file_path: str):
+    pass
+
+
+if __name__ == "__main__":
+    args = docopt(__doc__)
+    if args.get("--download"):
+        print("not implemented yet")
+        exit(0)
+    elif password_path := args.get("<passwords-path>"):
+        print(f"Initializing db with {password_path}")
+        init_db(password_path)
+    # else docopt will show help

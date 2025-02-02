@@ -26,6 +26,7 @@ testcontainers = {extras = ["generic"], version = "^4.9.1"}
 
 [tool.poetry.dependencies]
 redis = "^5.2.1"
+docopt = "^0.6.2"
 [tool.ruff]
 line-length = 120
 indent-width = 4
@@ -34,3 +35,4 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "N", "LOG"]
+ignore = ["F401"]

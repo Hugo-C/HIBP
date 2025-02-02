@@ -15,6 +15,7 @@ def _kvrocks() -> Redis:
 
         yield Redis(host=host, port=port)
 
+
 @pytest.fixture()
 def kvrocks(_kvrocks) -> Redis:
     try:
