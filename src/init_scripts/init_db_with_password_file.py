@@ -30,7 +30,7 @@ def init_db(file_path: str, db_client: Redis) -> int:
     hasher = PasswordHasher()
     storage = PasswordStorage(client=db_client)
     processed = 0
-    with open(file_path) as file:
+    with open(file_path, encoding='latin-1') as file:
         for line in file:
             password = line.strip()
             prefix = hasher.prefix(password)
@@ -38,16 +38,12 @@ def init_db(file_path: str, db_client: Redis) -> int:
             processed += 1
             if processed % 100 == 0:
                 print(f'\r{processed=}', end="")
+    storage.flush()
+    print("\ndone")
     return processed
 
 
 if __name__ == "__main__":
-    import sentry_sdk
-    sentry_sdk.init(
-        dsn="XXX",
-        traces_sample_rate=1.0,
-    )
-
     args = docopt(__doc__)
     if args.get("--download"):
         print("not implemented yet")
@@ -56,9 +52,7 @@ if __name__ == "__main__":
         print(f"Initializing db with {password_path}")
         start = time.time()
         redis_client = Redis(host=KVROCKS_HOST, port=KVROCKS_PORT)
-        sentry_sdk.profiler.start_profiler()
         init_db(password_path, db_client=redis_client)
-        sentry_sdk.profiler.stop_profiler()
         duration = time.time() - start
-        print(f"{duration=}")
+        print(f"Took {duration:.2f}s")
     # else docopt will show help

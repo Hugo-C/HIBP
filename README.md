@@ -50,6 +50,16 @@ On propose d'utiliser [Kvrocks](https://github.com/apache/kvrocks) qui est une s
 
 Pour le backend on utilise Python et FastAPI pour une question de simplicité de ces outils.
 
+---
+
+Lors de la création du script d'initialisation, arrive le moment de faire le premier test avec le jeu de donnée complet (Voir [commit](https://github.com/Hugo-C/HIBP/commit/7f5db7e5eecfada55918ec67b2e98cba9b911c9e)). Le script est relativement lent et je l'arrete après quelques minutes. En essayant sur 100k entrée le script prend 34s, ce qui donnerai 80mins avec les 14M d'entrées.
+J'utilise un outils de profiling (en l'occurence Sentry car je l'avais sous la main). Il montre que plus de 90% du temps est passé dans `PasswordStorage.add_password`:
+
+![profile Sentry](doc/sentry_profiling.png) 
+
+Plusieurs solutions sont envisagées. La première est de pousser les données en batch, ce qui nécessite avec `sadd` de pousser plusieurs password qui ont le même prefix. Cette solution parait compliqué à mettre en place, car elle oblige a stocker beaucoups d'informations en mémoire. D'autres solutions comme utiliser de l'asynchrone, ou encore du multiprocessing implique une forte complexité supplémentaire. Par exemple découper le fichier en entrée en une centaine de mini fichiers pour être traité par des "workers" différents. Heureusement Redis fournit un système de batch de commande via [les pipelines](https://redis.io/docs/latest/develop/use/pipelining/) qui permet d'avoir des commandes différentes dans un seul appel. Après quelques essaie, des batchs de 200 commandes semble être le bon compromis qui permet de faire 100k password en 3s, ce qui est plus acceptable.
+
+
 ### Partie génération de mot de passe
 
 TODO
