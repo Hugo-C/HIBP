@@ -4,6 +4,7 @@
 1. [Démarche et choix effectués](#démarche-et-choix-effectués)
 2. [Architecture](#architecture)
 3. [Utilisation](#utilisation)
+4. [Limite et améliorations possible](#limite-et-améliorations-possible)
 
 ## Démarche et choix effectués
 
@@ -64,3 +65,12 @@ TODO
 ### Initialisation de la base de donnée
 
 TODO
+
+### Setup dev
+
+`poetry sync` permet d'installer les dépendances, justfile (voir [ici pour l'installation](https://github.com/casey/just?tab=readme-ov-file#cross-platform)) permet de faire tourner les tests et le linter.
+
+## Limite et améliorations possible
+
+Le fichier docker compose est fonctionnel mais pourrait être améliorer pour de la production, notamment en ajoutant un mot de passe à la connection, customiser les paramètres par défaut, utiliser de la réplication pour de la haute disponibilité, ...
+Le script d'initialisation est de manière séquentielle. On peut améliorer les performances en utilisant de l'asynchrone et/ou du multithread pour paralleliser la calcul des hashs et l'insertion en DB au prix d'une plus grande complexité du code.
