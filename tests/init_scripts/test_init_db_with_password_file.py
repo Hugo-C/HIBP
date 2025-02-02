@@ -1,12 +1,9 @@
 import tempfile
 
-import pytest
-
 from src.common import PasswordHasher, PasswordStorage
 from src.init_scripts.init_db_with_password_file import init_db
 
 
-@pytest.mark.skip()  # TODO
 def test_init_db(kvrocks):
     with tempfile.NamedTemporaryFile() as fp:
         # we could use https://hypothesis.readthedocs.io/en/latest/ for more diverse test set

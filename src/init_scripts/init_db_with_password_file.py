@@ -24,7 +24,8 @@ def init_db(file_path: str, db_client: Redis) -> int:
     storage = PasswordStorage(client=db_client)
     processed = 0
     with open(file_path) as file:
-        for password in file:
+        for line in file:
+            password = line.strip()
             prefix = hasher.prefix(password)
             storage.add_password(prefix=prefix, password=password)
             processed += 1
