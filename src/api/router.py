@@ -1,6 +1,7 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Path
+from redis import Redis
 
 from src.api.dependencies import SettingsDep
 from src.common import PasswordStorage
@@ -20,6 +21,11 @@ APIPrefix = Annotated[
 ]
 
 
-@v1_router.get("/haveibeenrocked/{prefix}")
+@v1_router.get("/haveibeenrocked/{prefix}")  # TODO add response schema to openAPI
 def check_password_leak(prefix: APIPrefix, settings: SettingsDep):
-    return {"Hello": "World"}
+    redis_client = Redis.from_url(str(settings.kvrocks_url))
+    password_storage = PasswordStorage(client=redis_client)
+
+    matching_password = password_storage.get_passwords(prefix=prefix)
+
+    return {prefix: matching_password}

@@ -1,3 +1,4 @@
+from functools import cache
 from typing import Annotated
 
 from fastapi.params import Depends
@@ -9,6 +10,11 @@ def get_settings() -> Settings:
     return Settings()
 
 
-# TODO cache settings + password_storage ?
+@cache
+def get_settings_cached() -> Settings:
+    return Settings()
 
-SettingsDep = Annotated[Settings, Depends(get_settings)]
+
+# TODO cache password_storage ?
+
+SettingsDep = Annotated[Settings, Depends(get_settings_cached)]

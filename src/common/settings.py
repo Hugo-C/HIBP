@@ -1,5 +1,5 @@
 from pydantic import RedisDsn
-from pydantic.v1 import BaseSettings
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):

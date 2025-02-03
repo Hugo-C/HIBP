@@ -26,6 +26,7 @@ redis = "^5.2.1"
 docopt = "^0.6.2"
 xxhash = "^3.5.0"
 fastapi = {extras = ["standard"], version = "^0.115.8"}
+pydantic-settings = "^2.7.1"
 
 [tool.ruff]
 line-length = 120
