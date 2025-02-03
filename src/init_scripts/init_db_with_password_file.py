@@ -11,6 +11,7 @@ Options:
     <passwords-path>     Absolute path to the password init file (1 password per line
 
 """
+
 import os
 import time
 
@@ -23,21 +24,20 @@ KVROCKS_HOST = os.environ.get("KVROCKS_HOST", "localhost")
 KVROCKS_PORT = int(os.environ.get("KVROCKS_PORT", "6666"))
 
 
-
 def init_db(file_path: str, db_client: Redis) -> int:
     """Return the number of password inserted in db"""
     print("")  # allow print below to clear this line return
     hasher = PasswordHasher()
     storage = PasswordStorage(client=db_client)
     processed = 0
-    with open(file_path, encoding='latin-1') as file:
+    with open(file_path, encoding="latin-1") as file:
         for line in file:
             password = line.strip()
             prefix = hasher.prefix(password)
             storage.add_password(prefix=prefix, password=password)
             processed += 1
             if processed % 100 == 0:
-                print(f'\r{processed=}', end="")
+                print(f"\r{processed=}", end="")
     storage.flush()
     print("\ndone")
     return processed
