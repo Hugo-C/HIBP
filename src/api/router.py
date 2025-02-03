@@ -2,6 +2,9 @@ from typing import Annotated
 
 from fastapi import APIRouter, Path
 
+from src.api.dependencies import SettingsDep
+from src.common import PasswordStorage
+
 v1_router = APIRouter(
     prefix="/api/v1",
 )
@@ -18,5 +21,5 @@ APIPrefix = Annotated[
 
 
 @v1_router.get("/haveibeenrocked/{prefix}")
-def check_password_leak(prefix: APIPrefix):
+def check_password_leak(prefix: APIPrefix, settings: SettingsDep):
     return {"Hello": "World"}

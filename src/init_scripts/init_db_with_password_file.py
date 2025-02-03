@@ -18,10 +18,7 @@ import time
 from docopt import docopt
 from redis import Redis
 
-from src.common import PasswordHasher, PasswordStorage
-
-KVROCKS_HOST = os.environ.get("KVROCKS_HOST", "localhost")
-KVROCKS_PORT = int(os.environ.get("KVROCKS_PORT", "6666"))
+from src.common import PasswordHasher, PasswordStorage, Settings
 
 
 def init_db(file_path: str, db_client: Redis) -> int:
@@ -51,7 +48,8 @@ if __name__ == "__main__":
     elif password_path := args.get("<passwords-path>"):
         print(f"Initializing db with {password_path}")
         start = time.time()
-        redis_client = Redis(host=KVROCKS_HOST, port=KVROCKS_PORT)
+        settings = Settings()
+        redis_client = Redis.from_url(str(settings.kvrocks_url))
         init_db(password_path, db_client=redis_client)
         duration = time.time() - start
         print(f"Took {duration:.2f}s")
