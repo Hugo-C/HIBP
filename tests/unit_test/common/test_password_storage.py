@@ -7,7 +7,9 @@ SOME_PREFIX = "01234A"
 
 @pytest.fixture
 def password_storage(kvrocks):
-    yield PasswordStorage(client=kvrocks)
+    password_storage_ = PasswordStorage(client=kvrocks)
+    password_storage_.PIPELINE_MAX_SIZE = 1  # so we don't have to flush in our test
+    yield password_storage_
 
 
 def test_get_password_should_return_empty_set_at_first(password_storage):
