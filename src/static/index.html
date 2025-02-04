@@ -15,11 +15,15 @@
 
 <div class="content">
     <h2>Test de la fuite de mot de passe</h2>
-    <p>Cette page permet de tester si votre mot de passe est présent dans la base <a
-            href="https://en.wikipedia.org/wiki/RockYou#Data_breach" target="_blank">RockYou</a>.</p>
+    <div>Cette page permet de tester si votre mot de passe est présent dans la base <a
+            href="https://en.wikipedia.org/wiki/RockYou#Data_breach" target="_blank">RockYou</a>.
+    </div>
+    <div>
+        Le mot de passe n'est pas envoyé au serveur, uniquement les premiers caractères de son hash.
+    </div>
     <input id="submittedPassword"/>
     <input id="submittedPasswordButton" type="button" value="Tester">
-    <p>Le mot de passe n'est pas envoyé au serveur, uniquement les premiers caractères de son hash.</p>
+    <div id="passwordLeakCheckResult"></div>
 </div>
 
 </body>

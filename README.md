@@ -61,7 +61,8 @@ Plusieurs solutions sont envisagées. La première est de pousser les données e
 
 ---
 
-Pour la partie frontend, je n'ai pas réussie à mon grand regret à utiliser la librairie npm dans le navigateur d'une manière compatible avec Jest. Je me suis rabattu sur `browserify` puis sur `esbuild`.
+Pour la partie frontend, je n'ai pas réussie à mon grand regret à utiliser la librairie npm dans le navigateur d'une manière compatible avec Jest. Je me suis rabattu sur `browserify` puis sur `esbuild`.  
+Cela m'a obligé à supprimer les références au JS dans le HTML et a séparer le JS entre les éléments qui font appel au DOM (non compatible avec Jest) avec le code que l'on souhaite tester (voir [commit](https://github.com/Hugo-C/HIBP/commit/6204d792616d1e2dca3550e355350d4feeee047e)).
 
 ### Partie génération de mot de passe
 

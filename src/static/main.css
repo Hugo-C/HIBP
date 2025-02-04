@@ -41,3 +41,12 @@ body {
   margin-left: 200px;
   padding-left: 20px;
 }
+
+/* --- custom from here --- */
+.resultLeak {
+  background-color: #cb4335;
+}
+
+.resultClear {
+  background-color: #28b463;
+}
