@@ -66,7 +66,11 @@ Cela m'a obligé à supprimer les références au JS dans le HTML et a séparer 
 
 ### Partie génération de mot de passe
 
-TODO
+Pour cette fonctionnalité on va privilegier de la faire directement sur le navigateur du client. En effet cela garantie la confidentialité du password généré.  
+On utilisera comme paramétrage par défaut:
+> 15 caractères minimum et contenant des minuscules, des majuscules, des chiffres et des caractères spéciaux.
+
+En s'appuyant sur [les recommandations de l'Anssi datant de 2021](https://cyber.gouv.fr/publications/recommandations-relatives-lauthentification-multifacteur-et-aux-mots-de-passe) pour un niveau de sensibilité fort à très fort.
 
 ## Architecture
 
