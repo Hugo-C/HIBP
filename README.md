@@ -72,6 +72,10 @@ On utilisera comme paramétrage par défaut:
 
 En s'appuyant sur [les recommandations de l'Anssi datant de 2021](https://cyber.gouv.fr/publications/recommandations-relatives-lauthentification-multifacteur-et-aux-mots-de-passe) pour un niveau de sensibilité fort à très fort.
 
+On utilisera une [Crypto.getRandomValues](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues) qui est une fonction pseudo-aléatoire adaptée à une utilisation cryptographique.
+Pour garantir la présence de certains éléménts comme une majuscule, on relancera la génération du mot de passe jusqu'a ce que toutes les conditions soient remplies.    
+Javascript ne semble pas avoir de fonction `shuffle` cryptographique, sinon on aurait pu l'utiliser pour rajouter en premier les éléments requis et ensuite les mélanger. 
+
 ## Architecture
 
 ![Vue d'ensemble de l'architecture](doc/architecture.excalidraw.png)
