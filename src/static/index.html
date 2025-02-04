@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HIBP - clone</title>
+    <link href="main.css" rel="stylesheet"/>
+    <script type="module" src="bundle.js"></script>
+</head>
+<body>
+<div class="sidenav">
+    <a href="/">Test de la fuite de mot de passe</a>  <!-- TODO highlight current page -->
+    <a href="/">Génération de mot de passe</a>
+    <a href="/docs">Documentation OpenAPI</a>
+</div>
+
+<div class="content">
+    <h2>Test de la fuite de mot de passe</h2>
+    <p>Cette page permet de tester si votre mot de passe est présent dans la base <a
+            href="https://en.wikipedia.org/wiki/RockYou#Data_breach" target="_blank">RockYou</a>.</p>
+    <input id=submittedPassword/>
+    <input type="button" onclick="submitPassword()" value="Tester">
+    <p>Le mot de passe n'est pas envoyé au serveur, uniquement les premiers caractères de son hash.</p>
+</div>
+
+<script>
+    document.addEventListener("keyup", ({key}) => {
+        if (key === "Enter") {
+            submitPassword()
+        }
+    })
+</script>
+</body>
+</html>

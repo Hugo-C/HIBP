@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/static/check_password_leak.js --bundle --outfile=src/static/bundle.js",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "esbuild": "^0.24.2",
+    "xxhash-wasm": "^1.1.0"
+  }
+}

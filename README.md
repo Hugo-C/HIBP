@@ -15,7 +15,7 @@ Une CI basique sera mise en place. Uniquement la branche master sera utilisée. 
 
 Les conventions de code suivi sont:
 * [PEP8](https://pep8.org/) pour Python
-* TODO
+* [Airbnb](https://github.com/airbnb/javascript) pour JavaScript
 
 ### Partie fuite de mot de passe
 
@@ -59,6 +59,9 @@ J'utilise un outils de profiling (en l'occurence Sentry car je l'avais sous la m
 
 Plusieurs solutions sont envisagées. La première est de pousser les données en batch, ce qui nécessite avec `sadd` de pousser plusieurs password qui ont le même prefix. Cette solution parait compliqué à mettre en place, car elle oblige a stocker beaucoups d'informations en mémoire. D'autres solutions comme utiliser de l'asynchrone, ou encore du multiprocessing implique une forte complexité supplémentaire. Par exemple découper le fichier en entrée en une centaine de mini fichiers pour être traité par des "workers" différents. Heureusement Redis fournit un système de batch de commande via [les pipelines](https://redis.io/docs/latest/develop/use/pipelining/) qui permet d'avoir des commandes différentes dans un seul appel. Après quelques essaie, des batchs de 200 commandes semble être le bon compromis qui permet de faire 100k password en 3s, ce qui est plus acceptable.
 
+---
+
+Pour la partie frontend, je n'ai pas réussie à mon grand regret à utiliser la librairie npm dans le navigateur d'une manière compatible avec Jest. Je me suis rabattu sur `browserify` puis sur `esbuild`.
 
 ### Partie génération de mot de passe
 
@@ -78,7 +81,8 @@ TODO
 
 ### Setup dev
 
-`poetry sync` permet d'installer les dépendances, justfile (voir [ici pour l'installation](https://github.com/casey/just?tab=readme-ov-file#cross-platform)) permet de faire tourner les tests et le linter.
+`poetry sync` permet d'installer les dépendances, justfile (voir [ici pour l'installation](https://github.com/casey/just?tab=readme-ov-file#cross-platform)) permet de faire tourner les tests et le linter.  
+`npm install` permet d'installer les dépendances coté frontend.
 
 ## Limite et améliorations possible
 
