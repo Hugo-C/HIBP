@@ -1,15 +1,15 @@
-import xxhash from "xxhash-wasm";
+import { hashPrefix } from './hash.js';
+
+document.addEventListener("keyup", ({key}) => {
+    if (key === 'Enter') {
+        submitPassword()
+    }
+})
+document.getElementById('submittedPasswordButton').addEventListener('click', (e) => {
+    submitPassword();
+})
 
 function submitPassword() {
-    let password = document.getElementById("submittedPassword").value;
+    let password = document.getElementById('submittedPassword').value;
     hashPrefix(password).then(prefix => alert(prefix));
 }
-
-async function hashPrefix(password) {
-    const { h32, h64 } = await xxhash();
-    let digest =  h32(password);
-    let hexadecimal_digest = digest.toString(16)
-    return hexadecimal_digest.substring(0, 5)
-}
-
-export {hashPrefix};
