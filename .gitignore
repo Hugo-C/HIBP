@@ -1,2 +1,2 @@
-**/bundle.js
+src/static/*.bundle.js
 package-lock.json

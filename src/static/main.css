@@ -53,3 +53,8 @@ body {
 .resultClear {
   background-color: #28b463;
 }
+
+#passwordGenerated {
+	font-weight: bold;
+	background-color: #d5d5d5;
+}

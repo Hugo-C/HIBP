@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "build": "esbuild src/static/check_password_leak.js --bundle --outfile=src/static/bundle.js",
+    "build": "./build.js",
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "devDependencies": {
