@@ -1,10 +1,18 @@
 services:
+  fastapi:
+    build: .
+    environment:
+      - WEB_CONCURRENCY=4  # set uvicorn workers
+      - KVROCKS_URL=redis://kvrocks:6666
+    ports:
+      - 80:80
+    depends_on:
+      - kvrocks
+
   kvrocks:
     image: apache/kvrocks:2.11.0
     volumes:
       - kvrocks_data_volume:/kvrocks_data
-    ports:
-      - 6666:6666  # TODO remove on final version
 
 volumes:
   kvrocks_data_volume:
