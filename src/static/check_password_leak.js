@@ -1,6 +1,6 @@
 import { hashPrefix } from './hash.js';
 
-const API_URL = 'http://localhost:8000/api/v1/haveibeenrocked/';
+const API_URL = '/api/v1/haveibeenrocked/';
 
 const passwordLeakCheckResult = document.getElementById('passwordLeakCheckResult')
 

@@ -43,6 +43,9 @@ body {
 }
 
 /* --- custom from here --- */
+.selected {
+  background-color: #4da742;
+}
 .resultLeak {
   background-color: #cb4335;
 }
