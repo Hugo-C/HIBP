@@ -2,3 +2,13 @@ src/static/*.bundle.js
 package-lock.json
 
 node_modules/
+
+.git/
+.idea/
+.venv/
+
+__pycache__/
+**/__pycache__/
+
+*.py[cod]
+*$py.class

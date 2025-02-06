@@ -91,12 +91,14 @@ docker compose up
 
 Dans un nouveau terminal, si vous avez déjà une base de mot de passe type rockyou.txt en local:
 ```shell
-docker compose run -v <path_to_directory_having_rockyou.txt>:/rockdir fastapi python src/init_scripts/init_db_with_password_file.py /rockdir/rockyou.txt
+docker compose run --rm -v <path_to_directory_having_rockyou.txt>:/rockdir fastapi python src/init_scripts/init_db_with_password_file.py /rockdir/rockyou.txt
 ```
 si vous souhaitez le télécharger automatiquement:
 ```shell
-TODO
+docker compose run --rm fastapi python src/init_scripts/init_db_with_password_file.py --download
 ```
+
+La base de donnée utilise un volume Docker qui peut être supprimé avec `docker volume remove hibp_kvrocks_data_volume`.
 
 ### Setup dev
 
