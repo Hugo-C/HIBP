@@ -82,16 +82,27 @@ Javascript ne semble pas avoir de fonction `shuffle` cryptographique, sinon on a
 
 ## Utilisation
 
-TODO
+Le projet utilise docker, lancez simplement:
+```shell
+docker compose up
+```
 
 ### Initialisation de la base de donnée
 
+Dans un nouveau terminal, si vous avez déjà une base de mot de passe type rockyou.txt en local:
+```shell
+docker compose run -v <path_to_directory_having_rockyou.txt>:/rockdir fastapi python src/init_scripts/init_db_with_password_file.py /rockdir/rockyou.txt
+```
+si vous souhaitez le télécharger automatiquement:
+```shell
 TODO
+```
 
 ### Setup dev
 
-`poetry sync` permet d'installer les dépendances, justfile (voir [ici pour l'installation](https://github.com/casey/just?tab=readme-ov-file#cross-platform)) permet de faire tourner les tests et le linter.  
-`npm install` permet d'installer les dépendances coté frontend.
+`poetry sync` permet d'installer les dépendances. L'outils justfile (voir [ici pour l'installation](https://github.com/casey/just?tab=readme-ov-file#cross-platform)) permet de faire tourner les tests et le linter.  
+`npm install` permet d'installer les dépendances coté frontend.  
+`npm run build` permet de générer les bundles JS utilisé par le front et `npm test` de lancer les tests Jest.
 
 ## Limite et améliorations possible
 

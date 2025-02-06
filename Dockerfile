@@ -4,7 +4,7 @@ WORKDIR /build
 
 COPY package*.json ./
 
-RUN npm install --only=production
+RUN npm install --omit=dev
 
 COPY . .
 
@@ -12,7 +12,7 @@ RUN npm run build
 
 FROM python:3.12
 
-ENV POETRY_VERSION=2.0.1
+ENV POETRY_VERSION=2.0.1 PYTHONPATH="${PYTHONPATH}:/code"
 
 WORKDIR /code
 
