@@ -1,3 +1,15 @@
+FROM node:23 AS builder
+
+WORKDIR /build
+
+COPY package*.json ./
+
+RUN npm install --only=production
+
+COPY . .
+
+RUN npm run build
+
 FROM python:3.12
 
 ENV POETRY_VERSION=2.0.1
@@ -12,6 +24,8 @@ RUN pip install --upgrade pip && \
     poetry sync --only main --compile
 
 COPY ./src /code/src
+
+COPY --from=builder /build/src/static /code/src/static
 
 RUN chown -R 1001:1001 /code
 
