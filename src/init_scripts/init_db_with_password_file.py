@@ -89,6 +89,10 @@ if __name__ == "__main__":
             password_count += 1
 
     redis_client = Redis.from_url(str(settings.kvrocks_url))
-    init_db(password_path, db_client=redis_client, password_count=password_count)
-    duration = time.time() - start
-    print(f"Took {duration:.2f}s")
+    try:
+        init_db(password_path, db_client=redis_client, password_count=password_count)
+    except KeyboardInterrupt:
+        print("[red]Cancelled by user")
+    finally:
+        duration = time.time() - start
+        print(f"Took {duration:.2f}s")
