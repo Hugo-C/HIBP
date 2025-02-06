@@ -15,6 +15,4 @@ def get_settings_cached() -> Settings:
     return Settings()
 
 
-# TODO cache password_storage ?
-
 SettingsDep = Annotated[Settings, Depends(get_settings_cached)]

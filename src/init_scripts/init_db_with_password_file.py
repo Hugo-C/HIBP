@@ -54,6 +54,13 @@ def init_db(file_path: str, db_client: Redis, password_count: int = 0) -> int:
     return processed
 
 
+def download_rockyou(download_file):
+    with httpx.stream("GET", ROCKYOU_DOWNLOAD_URL, follow_redirects=True) as r:
+        for data in r.iter_bytes():
+            download_file.write(data)
+    download_file.close()
+
+
 if __name__ == "__main__":
     start = time.time()
     args = docopt(__doc__)
@@ -61,10 +68,7 @@ if __name__ == "__main__":
         print("Initializing DB with rockyou passwords from internet")
         # Create a temporary file that is deleted automatically on program close
         download_file = tempfile.NamedTemporaryFile(delete=True, delete_on_close=False)
-        with httpx.stream("GET", ROCKYOU_DOWNLOAD_URL, follow_redirects=True) as r:
-            for data in r.iter_bytes():
-                download_file.write(data)
-        download_file.close()
+        download_rockyou(download_file)
         print("download complete")
         password_path = download_file.name
     elif password_path := args.get("<passwords-path>"):

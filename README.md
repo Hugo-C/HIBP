@@ -96,7 +96,7 @@ Le projet utilise docker, lancez simplement:
 ```shell
 docker compose up
 ```
-Le site est disponible sur http://localhost:80/ par défaut.
+Le site est disponible sur http://localhost:80/ par défaut. Il est utilisable avec une base de donnée non initialisée.
 
 ### Initialisation de la base de donnée
 

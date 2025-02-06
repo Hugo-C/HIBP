@@ -29,8 +29,7 @@ class PasswordStorage:
         self._pipe.sadd(prefix, password)
         self._pipe_size += 1
         if self._pipe_size == self.PIPELINE_MAX_SIZE:
-            self._pipe.execute()
-            self._pipe_size = 0
+            self.flush()
 
     def get_passwords(self, prefix: Prefix) -> set[Password]:
         passwords_as_bytes = self.client.smembers(prefix)
