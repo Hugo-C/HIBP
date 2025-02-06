@@ -7,4 +7,4 @@ fix-qa:
   ruff format
 
 test:
-  pytest
+  poetry run pytest

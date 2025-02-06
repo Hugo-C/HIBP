@@ -27,7 +27,7 @@ from src.common import PasswordHasher, PasswordStorage, Settings
 ROCKYOU_DOWNLOAD_URL = "https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt"
 
 
-def init_db(file_path: str, db_client: Redis, password_count: int) -> int:
+def init_db(file_path: str, db_client: Redis, password_count: int = 0) -> int:
     """Return the number of password inserted in db"""
     processed = 0
     hasher = PasswordHasher()
@@ -76,7 +76,10 @@ if __name__ == "__main__":
     settings = Settings()
     password_count = 0
     with rich.progress.open(
-        password_path, encoding="latin-1", description="[orange3]Determining password count...", transient=True,
+        password_path,
+        encoding="latin-1",
+        description="[orange3]Determining password count...",
+        transient=True,
     ) as file:
         for line in file:
             password_count += 1
