@@ -18,6 +18,7 @@ build-backend = "poetry.core.masonry.api"
 pytest = "^8.3.4"
 ruff = "^0.9.4"
 testcontainers = {extras = ["generic"], version = "^4.9.1"}
+locust = "^2.32.8"
 
 
 [tool.poetry.dependencies]

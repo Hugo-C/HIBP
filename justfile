@@ -8,3 +8,6 @@ fix-qa:
 
 test:
   poetry run pytest
+
+load_test:
+  cd tests/load_test && locust
